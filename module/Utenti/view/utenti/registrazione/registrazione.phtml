@@ -1,56 +1,46 @@
 <h1>Registrazione</h1>
 
+
+<?php 
+	
+	$form = $this->form;
+	$form->prepare();
+
+
+
+?>
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form  id="registrazione" role="form">
-				<div class="form-inline">
-					<div class="form-group ">
-						<label for="nome">
-							Nome*
-						</label>
-						<input type="text" class="form-control" name="nome" id="nome" required="required" />
-					</div>
-					<div class="form-group ">
-						<label for="cognome">
-							Cognome*
-						</label>
-						<input type="text" class="form-control" name="cognome" id="cognome" required="required" />
-					</div>
+			<?php	echo $this->form()->openTag($form); ?>
+			<div class="form-inline">
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('nome')); ?>
 				</div>
 				<div class="form-group ">
-					<label for="email">
-						Email*
-					</label>
-					<input type="email" class="form-control" name="email" id="email" required="required" />
+					<?php echo $this->formRow($form->get('cognome')); ?>
 				</div>
-				<div class="form-group">
-					<label for="Password">
-						Password*
-					</label>
-					<input type="password" class="form-control" name="password" id="password" required="required" />
-					<label for="checkPassword">
-						Reinserire la Password*
-					</label>
-					<input type="password" class="form-control" name="checkPassword" id="checkPassword" required="required" />
-				</div>
-				<div class="form-group ">
-					<label for="telefono">
-						Telefono o Cellulare
-					</label>
-					<input type="text" class="form-control" name="telefono" id="telefono" />
-				</div>
-				<div class="checkbox">
-					 
-					<label>
-						<input type="checkbox" name="privacy" value="1" /> Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto. * 
-					</label>
-				</div> 
-				<p class="right">* campi obbligatori</p>
-				<button type="button" id="inviaRegistrazione" class="btn btn-primary">
-					Submit
-				</button>
-			</form>
+			</div>
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('email')); ?>
+			</div>
+			<div class="form-group">
+				<?php echo $this->formRow($form->get('password')); ?>
+				<?php echo $this->formRow($form->get('checkPassword')); ?>
+			</div>
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('telefono')); ?>
+			</div>
+			<div class="checkbox">
+				<?php echo $this->formRow($form->get('privacy')); ?>
+			</div> 
+			<p class="right">* campi obbligatori</p>
+
+			<?php echo $this->formSubmit($form->get('inviaRegistrazione')); ?>
+
+			<?php	echo $this->form()->closeTag(); ?>
 
 		</div>
 	</div>

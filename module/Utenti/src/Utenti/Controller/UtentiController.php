@@ -11,13 +11,26 @@ namespace Utenti\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Utenti\Form\Registrazione; 
 
 
 class UtentiController extends AbstractActionController
 {
-    public function registrazioneAction()
-    {
-    	$view = new ViewModel();
+	public $id;
+	public $email;
+
+
+    public function registrazioneAction() {
+
+    	$form =  new Registrazione();
+
+    	if($this->request->isPost()){
+    		$form->setData($this->request->getPost());
+    	}
+
+    	$view = new ViewModel(array(
+    		'form' => $form
+    	));
 		$view->setTemplate("utenti/registrazione/registrazione.phtml");
 		return $view;
     }
