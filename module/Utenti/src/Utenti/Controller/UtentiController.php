@@ -9,9 +9,11 @@
 
 namespace Utenti\Controller;
 
+use Utenti\Form\Registrazione; 
+use Utenti\InputFilter\RegistrazionePost;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Utenti\Form\Registrazione; 
+
 
 
 class UtentiController extends AbstractActionController
@@ -19,13 +21,19 @@ class UtentiController extends AbstractActionController
 	public $id;
 	public $email;
 
+	
+
 
     public function registrazioneAction() {
 
     	$form =  new Registrazione();
 
     	if($this->request->isPost()){
+    		$form->setInputFilter(new RegistrazionePost());
     		$form->setData($this->request->getPost());
+    		if($form->isValid()){
+    			/*salvare*/
+    		}
     	}
 
     	$view = new ViewModel(array(
