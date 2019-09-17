@@ -31,7 +31,7 @@ class Registrazione extends Form {
 		$checkPassword->setLabel('Reinserisci la password*');
 		$checkPassword->setAttribute("class", "form-control");
 
-		$telefono = new Element\Password('telefono');
+		$telefono = new Element\Text('telefono');
 		$telefono->setLabel('Telefono o Cellulare');
 		$telefono->setAttribute("class", "form-control");
 

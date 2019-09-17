@@ -11,17 +11,17 @@ namespace Utenti\Controller;
 
 use Utenti\Form\Registrazione; 
 use Utenti\InputFilter\RegistrazionePost;
+use Zend\Db\Adapter;
+
+use Utenti\Model\Utenti;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 
-
 class UtentiController extends AbstractActionController
 {
-	public $id;
-	public $email;
 
-	
+    protected $adapter;
 
 
     public function registrazioneAction() {
@@ -33,6 +33,16 @@ class UtentiController extends AbstractActionController
     		$form->setData($this->request->getPost());
     		if($form->isValid()){
     			/*salvare*/
+                $dbAdapter = $this->getAdapter();
+                $oUtenti = new Utenti($dbAdapter);
+                $check = $oUtenti->salvaUtente($this->request->getPost());
+                var_dump($check); exit();
+
+                $result = "";
+    			
+    			if($result){
+    			 	return $this->redirect()->toRoute('login');
+    			}
     		}
     	}
 
@@ -41,5 +51,24 @@ class UtentiController extends AbstractActionController
     	));
 		$view->setTemplate("utenti/registrazione/registrazione.phtml");
 		return $view;
+    }
+
+    public function saveUtente($data){
+
+        if(!$this->utentiTable){
+
+            $sm = $this->getServiceLocator();
+            $this->utentiTable = $sm->get('Utenti\Model\UtentiTable');
+        }
+        return $this->utentiTable;
+    }
+
+    public function getAdapter()
+    {
+       if (!$this->adapter) {
+          $sm = $this->getServiceLocator();
+          $this->adapter = $sm->get('Zend\Db\Adapter\Adapter');
+       }
+       return $this->adapter;
     }
 }

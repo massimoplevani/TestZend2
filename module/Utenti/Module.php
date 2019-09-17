@@ -1,6 +1,10 @@
 <?php
 namespace Utenti;
 
+use Utenti\Model\Utenti;
+use Zend\Db\ResultSet\ResultSet;
+use Zende\Db\TableGateway\TableGateway;
+
 class Module
 {
     public function getConfig()
@@ -19,3 +23,5 @@ class Module
         );
     }
 }
+ 
+
