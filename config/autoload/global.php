@@ -13,8 +13,8 @@
 
 return array(
    'db' => array(
-      'driver'         => 'Mysqli',
-      'dsn'            => 'mysql:dbname=zf2tutorial;host=localhost',
+      'driver'         => 'Pdo',
+      'dsn'            => 'mysql:dbname=zend2-test;host=localhost',
    ),
    'service_manager' => array(
       'factories' => array(

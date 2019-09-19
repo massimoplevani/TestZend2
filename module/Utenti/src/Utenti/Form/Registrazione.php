@@ -5,10 +5,12 @@ namespace Utenti\Form;
 use Zend\Form\Form;
 use Zend\Form\Element;
 
+
 class Registrazione extends Form {
 
 	public function __construct(){
-		parent::__construct('registrazione');
+
+		parent::__construct('utenti');
 
 		$nome = new Element\Text('nome');
 		$nome->setLabel('Nome*');

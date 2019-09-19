@@ -29,20 +29,20 @@ class UtentiController extends AbstractActionController
     	$form =  new Registrazione();
 
     	if($this->request->isPost()){
-    		$form->setInputFilter(new RegistrazionePost());
+    		$form->setInputFilter(new RegistrazionePost($this->getServiceLocator()));
     		$form->setData($this->request->getPost());
     		if($form->isValid()){
+
+                echo "etro"; exit();
     			/*salvare*/
+                /*$data = $form->getData();
+                $data = $this->prepareData($data);
                 $dbAdapter = $this->getAdapter();
                 $oUtenti = new Utenti($dbAdapter);
-                $check = $oUtenti->salvaUtente($this->request->getPost());
-                var_dump($check); exit();
-
-                $result = "";
-    			
-    			if($result){
-    			 	return $this->redirect()->toRoute('login');
-    			}
+                $check = $oUtenti->salvaUtente($this->request->getPost());    			
+    			if($check){
+    			 	//return $this->redirect()->toRoute('login');
+    			}*/
     		}
     	}
 

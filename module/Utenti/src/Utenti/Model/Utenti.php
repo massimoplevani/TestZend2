@@ -20,8 +20,10 @@ class Utenti extends TableGateway
 	public function salvaUtente($data){
 
 		$sql ="";
+		$aData = $data;
+		unset($aData["inviaRegistrazione"]);
 
-		var_dump($this->dbAdapter); exit();
+		var_dump($data); exit();
 
 	}
 
