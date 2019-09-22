@@ -9,6 +9,12 @@
 
 namespace Application;
 
+
+use Zend\View\HelperPluginManager;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Role\GenericRole;
+use Zend\Permissions\Acl\Resource\GenericResource;  
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -49,6 +55,36 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getViewHelperConfig()
+    {
+
+        return array(
+            'factories' => array(
+                'navigation' => function(HelperPluginManager $pm) {
+
+                    $sm = $pm->getServiceLocator();
+                    $config = $sm->get('Config');
+                    
+                    $acl = new \Application\Acl\Acl($config);
+                    $auth = $sm->get('Zend\Authentication\AuthenticationService');
+                    $role = \Application\Acl\Acl::DEFAULT_ROLE; 
+
+
+                    if ($auth->hasIdentity()) {
+                         $role = 'admin';
+                    }
+
+            
+                    $navigation = $pm->get('Zend\View\Helper\Navigation');
+                    
+                    $navigation->setAcl($acl)
+                               ->setRole($role);
+                    return $navigation;
+                }
+            )
         );
     }
 }
