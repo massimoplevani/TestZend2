@@ -4,6 +4,8 @@ namespace Utenti\Model;
 
 use Zend\Db\Adpater\Adpater\Platform\Mysql;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Sql;
+
 
 
 use Utenti\Model\UtentiTable;
@@ -17,13 +19,23 @@ class Utenti extends TableGateway
 	}
 
 
-	public function salvaUtente($data){
+	public function salvaUtente($aData){
 
-		$sql ="";
-		$aData = $data;
-		unset($aData["inviaRegistrazione"]);
+		if(empty($aData)) return false;
 
-		var_dump($data); exit();
+		$telefono = null;
+		if(!empty($aData['telefono'])){
+			$telefono = $aData['telefono'];
+		}
+ 		
+ 	 	//$this->dbAdapter->insert($data);
+		
+		$sql = "INSERT INTO  utenti (Nome, Cognome, Email, Password,Telefono,DataCreazione,DataAggiornamento) VALUES ('".$aData['nome']."','".$aData['cognome']."', '".$aData['email']."', '".$aData['password']."','".$telefono."','".$aData['DataCreazione']."','".$aData['DataCreazione']."')";
+
+		$prepareSql =  $this->dbAdapter->query($sql);
+
+		return $prepareSql->execute(); 
+
 
 	}
 

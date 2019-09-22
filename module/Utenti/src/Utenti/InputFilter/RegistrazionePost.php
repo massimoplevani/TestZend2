@@ -29,7 +29,6 @@ class RegistrazionePost extends InputFilter  {
 
 		$nome = new Input("nome");
 		$nome->setRequired(true);
-		
 		$nome->setValidatorChain($this->getStringLengthValidatorChain());
 		$nome->setFilterChain($this->getStringTrimFilterChain());
 
@@ -42,10 +41,8 @@ class RegistrazionePost extends InputFilter  {
 		$email = new Input("email");
 		$email->setRequired(true);
 		$email->setValidatorChain($this->getEmailValidatorChain());
-		$email->setValidatorChain($this->checkNotExistDBValue());
 		$email->setFilterChain($this->getStringTrimFilterChain());
 	
-
 
 		$password = new Input("password");
 		$password->setRequired(true);
@@ -74,13 +71,13 @@ class RegistrazionePost extends InputFilter  {
 
 
 		$privacy = new Input("privacy");
-		$cognome->setRequired(true);
+		$privacy->setRequired(true);
+
 
 		$this->add($nome);
 		$this->add($cognome);
 		$this->add($email);
 		$this->add($password);
-		//$this->add($checkPassword);
 		$this->add($privacy);
 		$this->setData($_POST);
 
@@ -100,11 +97,11 @@ class RegistrazionePost extends InputFilter  {
 
 		$RegMinuscole = new Validator\Regex('/[a-z]/');
 		$RegMinuscole->setMessage(
-		    'La password deve avere almeno una minuscola.');
+		    'La password deve avere almeno una lettera minuscola.');
 
 		$RegMaiuscole = new Validator\Regex('/[A-Z]/');
 		$RegMaiuscole->setMessage(
-		    'La password deve avere almeno una maiuscola.');
+		    'La password deve avere almeno una lettera maiuscola.');
 
 
 		$RegNumero =  new Validator\Regex('/[0-9]/');
@@ -121,12 +118,11 @@ class RegistrazionePost extends InputFilter  {
 
 
 		$validatorChain = new validatorChain();
-		$validatorChain->attach($StringLength);
-		  /*->attach($RegMinuscole)
+		$validatorChain->attach($StringLength)
+		  ->attach($RegMinuscole)
 		  ->attach($RegMaiuscole)
 		  ->attach($RegNumero)
-		  ->attach($RegCarattere);*/
-		  //->attach($identical);
+		  ->attach($RegCarattere);
 
 
 
@@ -156,7 +152,7 @@ class RegistrazionePost extends InputFilter  {
 		);
 
 		$valid->setMessage(
-		    'Le password inserite non corrispondono.');
+		    'Esiste già un utente con questa email!');
 
 		$validatorChain = new validatorChain();
 		$validatorChain->attach($valid);
@@ -190,9 +186,21 @@ class RegistrazionePost extends InputFilter  {
 		$checkEmail->setMessage(
 		    "L'email inserita non è valida");
 
+		$valid = new NoRecordExists(
+		    array(
+		        'table'   => 'utenti',
+		        'field'   => 'Email',
+		        'adapter' => $this->adapter
+		    )
+		);
+
+		$valid->setMessage(
+		    'Esiste già un utente con questa email!');
+
 
 		$validatorChain = new validatorChain();
 		$validatorChain->attach($checkEmail);
+		$validatorChain->attach($valid);
 
 		return $validatorChain;
 	}

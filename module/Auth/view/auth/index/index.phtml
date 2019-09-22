@@ -1,0 +1,12 @@
+<?php 
+	$nomeUtente = "";
+    if ($utente = $this->identity()) {
+
+    	$nomeUtente = $this->escapeHtml($utente->Nome). ' ' .$this->escapeHtml($utente->Cognome);
+
+     }else{
+     	$this->redirect()->toRoute('login');
+     }
+?>	
+
+<h1>Benvenuto <?php echo $nomeUtente; ?>!</h1>

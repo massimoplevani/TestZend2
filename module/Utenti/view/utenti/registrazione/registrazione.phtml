@@ -6,8 +6,11 @@
 	$form = $this->form;
 	$form->prepare();
 
-
-
+	$helper = $this->formElementErrors();
+	$helper->setMessageOpenFormat('<div class="help-inline error">');
+	$helper->setMessageSeparatorString('</div><div class="help-inline">');
+	$helper->setMessageCloseString('</div>');
+	
 ?>
 
 

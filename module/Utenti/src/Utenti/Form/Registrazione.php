@@ -38,6 +38,8 @@ class Registrazione extends Form {
 		$telefono->setAttribute("class", "form-control");
 
 
+
+
 		$privacy = new Element\Checkbox('privacy');
 		$privacy->setLabel("Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto. *");
 

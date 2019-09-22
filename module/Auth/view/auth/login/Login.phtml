@@ -1,0 +1,52 @@
+<h1>Login </h1>
+
+<?php echo $this->escapeHtml($this->messages); ?>
+
+<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url('login', array('controller' => 'auth', 'action' => 'login')));
+	$form->prepare();
+
+	$helper = $this->formElementErrors();
+	$helper->setMessageOpenFormat('<div class="help-inline error">');
+	$helper->setMessageSeparatorString('</div><div class="help-inline">');
+	$helper->setMessageCloseString('</div>');
+?>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<?php	echo $this->form()->openTag($form); ?>
+	
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('email')); ?>
+			</div>
+			<div class="form-group">
+				<?php echo $this->formRow($form->get('password')); ?>
+			</div>
+			<p class="right">* campi obbligatori</p>
+			
+			<div class="form-group">
+				<?php echo $this->formSubmit($form->get('submit')); ?>
+			</div>
+			<?php	echo $this->form()->closeTag(); ?>
+
+		</div>
+	</div>
+</div>
+
+<?php // view helper
+    if ($utente = $this->identity()) {
+        echo 'Logged in as ' . $this->escapeHtml($utente->nome). ' ' .$this->escapeHtml($utente->cognome);
+?>		
+ | <a href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a> 
+<?php
+    } else {
+        echo 'Not logged in';
+    }
+?>
+
+
+<p>
+	<a href="<?php echo $this->url('registrazione', array('controller' => 'utenti', 'action' => 'registrazione'));?>"><?php echo $this->translate('Registrati'); ?></a>
+</p>

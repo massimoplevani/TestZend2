@@ -19,6 +19,21 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $translator = $serviceManager->get('translator');
+
+        //$locale = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $locale = 'it_IT';
+        //$locale = 'en_US';
+
+        $translator->setLocale(\Locale::acceptFromHttp($locale));
+        $translator->addTranslationFile(
+            'phpArray',
+            './vendor/zendframework/zendframework/resources/languages/it/Zend_Validate.php',
+            'default',
+            'it_IT'
+        );
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
     }
 
     public function getConfig()

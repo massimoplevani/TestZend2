@@ -24,6 +24,12 @@ class UtentiController extends AbstractActionController
     protected $adapter;
 
 
+    public function indexAction()
+    {
+        return new ViewModel();
+    }   
+
+
     public function registrazioneAction() {
 
     	$form =  new Registrazione();
@@ -33,16 +39,15 @@ class UtentiController extends AbstractActionController
     		$form->setData($this->request->getPost());
     		if($form->isValid()){
 
-                echo "etro"; exit();
     			/*salvare*/
-                /*$data = $form->getData();
-                $data = $this->prepareData($data);
+                $data = $form->getData();
+                $data = $this->prepareDataReg($data);
                 $dbAdapter = $this->getAdapter();
                 $oUtenti = new Utenti($dbAdapter);
-                $check = $oUtenti->salvaUtente($this->request->getPost());    			
+                $check = $oUtenti->salvaUtente($data);    			
     			if($check){
-    			 	//return $this->redirect()->toRoute('login');
-    			}*/
+    			 	return $this->redirect()->toRoute('login');
+    			}
     		}
     	}
 
@@ -53,14 +58,21 @@ class UtentiController extends AbstractActionController
 		return $view;
     }
 
-    public function saveUtente($data){
 
-        if(!$this->utentiTable){
+   
+    public function prepareDataReg($data){
 
-            $sm = $this->getServiceLocator();
-            $this->utentiTable = $sm->get('Utenti\Model\UtentiTable');
-        }
-        return $this->utentiTable;
+            $config = $this->getConfigAdapter();
+            $staticKey = $config['static_key'];
+            $data['password']  = md5($staticKey.$data['password']);
+            date_default_timezone_set("Europe/Rome");
+            $date = new \DateTime();
+            $data['DataCreazione']  =  $date->format('Y-m-d H:i:s');
+
+            unset($data['inviaRegistrazione']);
+            unset($data['checkPassword']);
+
+            return $data;
     }
 
     public function getAdapter()
@@ -70,5 +82,12 @@ class UtentiController extends AbstractActionController
           $this->adapter = $sm->get('Zend\Db\Adapter\Adapter');
        }
        return $this->adapter;
+    }
+
+
+    protected function getConfigAdapter(){
+
+       return $this->getServiceLocator()->get('Config');
+
     }
 }
