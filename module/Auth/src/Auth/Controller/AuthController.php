@@ -24,7 +24,16 @@ class AuthController extends AbstractActionController
 	public function indexAction()
     {	
 
-    	$view = new ViewModel();
+    	$nomeUtente = "";
+	    if ($utente = $this->identity()) {
+	    	$nomeUtente = ucfirst($utente->Nome). ' ' .ucfirst($utente->Cognome);
+	     }else{
+	     	$this->redirect()->toRoute('login');
+	     }
+
+    	$view = new ViewModel(array(
+    		'nomeUtente' => $nomeUtente
+    	));
 
 		$view->setTemplate("auth/index/index.phtml");
 
@@ -67,9 +76,11 @@ class AuthController extends AbstractActionController
 				switch ($result->getCode()) {
 					case Result::FAILURE_IDENTITY_NOT_FOUND:
 						// identita inesistente
+						$messages = "Utente inesistente!\n";
 						break;
 					case Result::FAILURE_CREDENTIAL_INVALID:
 						//invalide credenziale
+						$messages = "La password o email non corrette! Riprovare!\n";
 						break;
 					case Result::SUCCESS:
 						$storage = $auth->getStorage();
@@ -85,9 +96,7 @@ class AuthController extends AbstractActionController
 						// do stuff for other failure
 						break;
 				}				
-				foreach ($result->getMessages() as $message) {
-					$messages .= "$message\n"; 
-				}			
+						
 			 }
 		}
 
@@ -114,6 +123,6 @@ class AuthController extends AbstractActionController
 		$sessionManager = new \Zend\Session\SessionManager();
 		$sessionManager->forgetMe();
 		
-		return $this->redirect()->toRoute('login', array('controller' => 'auth', 'action' => 'login'));		
+		return $this->redirect()->toRoute('home', array('controller' => 'Application\Controller\Index', 'action' => 'index'));		
 	}	
 }

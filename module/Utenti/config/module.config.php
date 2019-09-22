@@ -35,6 +35,32 @@ return array(
                     ),
                 ),
             ),
+            'profilo' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/profilo',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Utenti\Controller',
+                        'controller'    => 'Utenti',
+                        'action'        => 'profilo',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 	'controllers' => array(

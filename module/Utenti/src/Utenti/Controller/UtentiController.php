@@ -59,6 +59,41 @@ class UtentiController extends AbstractActionController
     }
 
 
+
+    public function profiloAction() {
+
+        if (!$this->identity()) {
+            $this->redirect()->toRoute('login');
+         }
+       
+        $data = (array) $this->identity();
+
+        $aDatiUtente = $this->prepareDataProfilo($data);    
+
+        $view = new ViewModel(array(
+            'aDatiUtente' => $aDatiUtente
+        ));
+        $view->setTemplate("utenti/profilo/profilo.phtml");
+        return $view;
+    }
+
+
+    public function prepareDataProfilo($data){
+
+            $aDatiUtente = $data;
+            $date=date_create($aDatiUtente['DataCreazione']);
+            $aDatiUtente['Data Creazione'] = date_format($date,"d-m-Y H:i:s"); 
+            $date=date_create($aDatiUtente['DataAggiornamento']);
+            $aDatiUtente['Data Aggiornamento'] = date_format($date,"d-m-Y H:i:s"); 
+
+            unset($aDatiUtente['DataCreazione']); 
+            unset($aDatiUtente['DataAggiornamento']); 
+            unset($aDatiUtente['Password']); 
+
+            return $aDatiUtente;
+    }
+
+
    
     public function prepareDataReg($data){
 

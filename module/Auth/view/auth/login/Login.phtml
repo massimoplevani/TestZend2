@@ -1,6 +1,5 @@
 <h1>Login </h1>
 
-<?php echo $this->escapeHtml($this->messages); ?>
 
 <?php
 	$form = $this->form;
@@ -25,6 +24,10 @@
 				<?php echo $this->formRow($form->get('password')); ?>
 			</div>
 			<p class="right">* campi obbligatori</p>
+
+			<div class='error form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+			
+
 			
 			<div class="form-group">
 				<?php echo $this->formSubmit($form->get('submit')); ?>
@@ -37,13 +40,11 @@
 
 <?php // view helper
     if ($utente = $this->identity()) {
-        echo 'Logged in as ' . $this->escapeHtml($utente->nome). ' ' .$this->escapeHtml($utente->cognome);
+        echo 'Loggato come ' . $this->escapeHtml($utente->nome). ' ' .$this->escapeHtml($utente->cognome);
 ?>		
  | <a href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a> 
 <?php
-    } else {
-        echo 'Not logged in';
-    }
+    } 
 ?>
 
 

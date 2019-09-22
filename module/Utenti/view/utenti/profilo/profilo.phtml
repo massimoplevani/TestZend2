@@ -1,0 +1,15 @@
+<h1><?php echo $this->translate('Il tuo profilo'); ?></h1>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="list-unstyled">
+				<?php foreach ($this->aDatiUtente as $key => $value) { ?>
+					<li class="list-item">
+						<b><?php echo $this->translate(ucfirst($key)); ?></b>: <?php echo (!empty($value)) ?  $value :  "-------" ?>
+					</li>
+				<?php } ?>
+			</ol>
+		</div>
+	</div>
+</div>
