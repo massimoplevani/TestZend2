@@ -18,7 +18,9 @@ return array(
 				'Utenti\Controller\Utenti' => array(
 					'registrazione'	=> 'guest',
 					'profilo' => 'admin',
-					'logout'=> 'admin'
+					'logout'=> 'admin',
+                    'nuovaPolizza' => 'admin',
+                    'elencoPolizza' => 'admin'
 				),	
 
             )

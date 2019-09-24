@@ -46,20 +46,60 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+            ),
+            'nuova-polizza' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/nuova-polizza',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Utenti\Controller',
+                        'controller'    => 'Utenti',
+                        'action'        => 'nuovaPolizza',
                     ),
                 ),
+                'may_terminate' => true,
+            ),
+            'elenco-polizza' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/elenco-polizza',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Utenti\Controller',
+                        'controller'    => 'Utenti',
+                        'action'        => 'elencoPolizza',
+                    ),
+                ),
+                'may_terminate' => true
+            ),
+            'modifica-polizza' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/modifica-polizza[/:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                     ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Utenti\Controller',
+                        'controller'    => 'Utenti',
+                        'action'        => 'modificaPolizza',
+                    ),
+                ),
+                'may_terminate' => true
+            ),
+            'dettaglio-polizza' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/dettaglio-polizza[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+',
+                     ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Utenti\Controller',
+                        'controller'    => 'Utenti',
+                        'action'        => 'elencoPolizza',
+                    ),
+                ),
+                'may_terminate' => true
             ),
         ),
     ),

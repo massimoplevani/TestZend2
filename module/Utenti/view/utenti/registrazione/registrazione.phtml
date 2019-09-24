@@ -36,9 +36,10 @@
 			<div class="form-group ">
 				<?php echo $this->formRow($form->get('telefono')); ?>
 			</div>
-			<div class="checkbox">
-				<?php echo $this->formRow($form->get('privacy')); ?>
-			</div> 
+			<div class="form-group ">
+				<p>Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto.</p>
+			</div>
+
 			<p class="right">* campi obbligatori</p>
 
 			<?php echo $this->formSubmit($form->get('inviaRegistrazione')); ?>

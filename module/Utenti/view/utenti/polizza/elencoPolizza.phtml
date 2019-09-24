@@ -1,0 +1,76 @@
+<h1>Elenco Polizza</h1>
+
+<div class="container-fluid">
+	<div class="row text-right">
+		<div class="col-md-12">
+			<a class='btn btn-default' href="<?php echo $this->url('nuova-polizza');?>"><?php echo $this->translate('Nuova Polizza'); ?></a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							ID Polizza
+						</th>
+						<th>
+							Compagnia
+						</th>
+						<th>
+							Data inserimento
+						</th>
+						<th>
+							Azioni
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if(empty($aPolizze)){ ?>
+						<tr>
+							<td colspan="5">
+								<?php echo $this->translate('Nessuna polizza inserita.'); ?>
+							</td>
+						</tr>
+					<?php 
+
+						} else{
+
+							foreach($aPolizze as $key => $value) { 
+
+					?>
+					<tr>
+						<td>
+							<?php echo $key+1; ?>
+						</td>
+						<td>
+							<?php echo $value['IDPolizza']; ?>
+						</td>
+						<td>
+							<?php echo $value['Compagnia']; ?>
+						</td>
+						<td>
+							<?php echo $value['DataCreazione']; ?>
+						</td>
+						<td>
+							<?php echo "<a class='btn btn-default' href='".$this->url('modifica-polizza')."\\".$value['id']."'>".$this->translate('Edit')."</a>"; ?>
+
+							<?php echo "<a class='btn btn-default' href='".$this->url('dettaglio-polizza')."\\".$value['id']."'>".$this->translate('View')."</a>"; ?>
+						</td>
+					</tr>
+					<?php 
+
+						} 
+					 }
+					?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,87 @@
+<h1><?php echo $this->title; ?></h1>
+
+
+<?php 
+	
+	$form = $this->form;
+	$form->prepare();
+
+	$helper = $this->formElementErrors();
+	$helper->setMessageOpenFormat('<div class="help-inline error">');
+	$helper->setMessageSeparatorString('</div><div class="help-inline">');
+	$helper->setMessageCloseString('</div>');
+	
+?>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<?php	echo $this->form()->openTag($form); ?>
+
+			<?php echo $this->formRow($form->get('IDUtente')); ?>
+			<div class="form-inline">
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('idpolizza')); ?>
+				</div>
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('compagnia')); ?>
+				</div>
+				
+			</div>
+			
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('nomePolizza')); ?>
+			</div>
+
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('tipopolizza')); ?>
+			</div>
+
+			<div id='casoCasa' >
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('indirizzo')); ?>
+				</div>
+			</div>
+
+
+			<div id='casoAuto' class="hidden">
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('marca')); ?>
+				</div>
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('modello')); ?>
+				</div>
+
+				<div class="form-group ">
+					<?php echo $this->formRow($form->get('targa')); ?>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<?php echo $this->formRow($form->get('premioPagato')); ?>
+			</div>
+
+
+			<div class="form-group">
+				<?php echo $this->formRow($form->get('dataEmissione')); ?>
+			</div> 
+			<div class="form-group">
+				<?php echo $this->formRow($form->get('dataScadenza')); ?>
+			</div> 
+		
+			<p class="right">* campi obbligatori</p>
+			<div class="form-group ">
+				<p>Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto.</p>
+			</div>
+
+			<div class='error form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+
+
+			<?php echo $this->formSubmit($form->get('inviaPolizza')); ?>
+
+			<?php	echo $this->form()->closeTag(); ?>
+
+		</div>
+	</div>
+</div>

@@ -6,7 +6,7 @@ use Zend\Form\Form;
 use Zend\Form\Element;
 
 
-class Registrazione extends Form {
+class registrazioneForm extends Form {
 
 	public function __construct(){
 
@@ -37,13 +37,6 @@ class Registrazione extends Form {
 		$telefono->setLabel('Telefono o Cellulare');
 		$telefono->setAttribute("class", "form-control");
 
-
-
-
-		$privacy = new Element\Checkbox('privacy');
-		$privacy->setLabel("Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto. *");
-
-
 		$invia = new Element\Submit('inviaRegistrazione');
 		$invia->setValue("Registrati");
 		$invia->setAttribute("class", "btn btn-primary");
@@ -55,7 +48,6 @@ class Registrazione extends Form {
 		$this->add($password);
 		$this->add($checkPassword);
 		$this->add($telefono);
-		$this->add($privacy);
 		$this->add($invia);
 
 

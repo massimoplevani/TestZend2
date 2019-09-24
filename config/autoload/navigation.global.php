@@ -15,6 +15,24 @@
 return array( // ToDO make it dynamic - comes from the DB
      'navigation' => array(
          'default' => array(
+         	array(
+                 'label' => 'Elenco Polizza', 
+                 'route' => 'elenco-polizza', 
+                 'class' => 'nav-item',
+				 'action'     => 'elencoPolizza',
+				 'controller' => 'Utenti',
+				 'resource'	=> 'Utenti\Controller\Utenti',
+				 'privilege'	=> 'elencoPolizza',
+             ),
+         	array(
+                 'label' => 'Nuova Polizza', 
+                 'route' => 'nuova-polizza', 
+                 'class' => 'nav-item',
+				 'action'     => 'nuovaPolizza',
+				 'controller' => 'Utenti',
+				 'resource'	=> 'Utenti\Controller\Utenti',
+				 'privilege'	=> 'nuovaPolizza',
+             ),
              array(
                  'label' => 'Registrati', 
                  'route' => 'registrazione', 

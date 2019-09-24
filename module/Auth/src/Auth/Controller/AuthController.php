@@ -65,10 +65,7 @@ class AuthController extends AbstractActionController
 										   'password', 
 										   "MD5(CONCAT('$staticKey', ?))" 
 										  );
-				$authAdapter
-					->setIdentity($data['email'])
-					->setCredential($data['password'])
-				;
+				$authAdapter->setIdentity($data['email'])->setCredential($data['password']);
 				
 				$auth = new AuthenticationService();
 				$result = $auth->authenticate($authAdapter);			
