@@ -37,9 +37,12 @@ class UtentiController extends AbstractActionController
 
     	$form =  new registrazioneForm();
 
+
+
     	if($this->request->isPost()){
     		$form->setInputFilter(new RegistrazionePost($this->getServiceLocator()));
     		$form->setData($this->request->getPost());
+
     		if($form->isValid()){
 
     			/*salvare*/

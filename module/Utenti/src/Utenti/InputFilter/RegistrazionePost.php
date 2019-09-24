@@ -70,15 +70,10 @@ class RegistrazionePost extends InputFilter  {
 		);
 
 
-		$privacy = new Input("privacy");
-		$privacy->setRequired(true);
-
-
 		$this->add($nome);
 		$this->add($cognome);
 		$this->add($email);
 		$this->add($password);
-		$this->add($privacy);
 		$this->setData($_POST);
 
 
