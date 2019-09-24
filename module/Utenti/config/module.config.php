@@ -89,14 +89,14 @@ return array(
             'dettaglio-polizza' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/dettaglio-polizza[:id]',
+                    'route'    => '/dettaglio-polizza[/:id]',
                     'constraints' => array(
                         'id' => '[0-9]+',
                      ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Utenti\Controller',
                         'controller'    => 'Utenti',
-                        'action'        => 'elencoPolizza',
+                        'action'        => 'dettaglioPolizza',
                     ),
                 ),
                 'may_terminate' => true

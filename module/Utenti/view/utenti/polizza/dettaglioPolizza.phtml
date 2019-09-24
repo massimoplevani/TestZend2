@@ -1,0 +1,24 @@
+<h1><?php echo $this->title; ?></h1>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="list-unstyled">
+				<?php foreach ($this->aDatiPolizza as $key => $value) { ?>
+					<li class="list-item">
+						<?php if($key == 'IDTipoPolizza' && $aDatiPolizza['IDTipoPolizza'] == '1'){
+							$value = 'Casa';
+						} else if($key == 'IDTipoPolizza'){
+							$value = 'Auto';
+						} ?>
+						<?php if($this->aDatiPolizza['IDTipoPolizza'] == '1' && !in_array(ucfirst($key), array('Targa','Modello','Marca'))) { ?>
+							<b><?php echo $this->translate(ucfirst($key)); ?></b>: <?php echo (!empty($value)) ?  $value :  "-------" ?>
+						<?php } else if($this->aDatiPolizza['IDTipoPolizza'] == '2' && !in_array(ucfirst($key), array('Indirizzo'))) {?> 
+						<b><?php echo $this->translate(ucfirst($key)); ?></b>: <?php echo (!empty($value)) ?  $value :  "-------" ?>
+						<?php } ?>
+					</li>
+				<?php } ?>
+			</ol>
+		</div>
+	</div>
+</div>

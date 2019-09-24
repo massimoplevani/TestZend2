@@ -182,6 +182,25 @@ class UtentiController extends AbstractActionController
     }
 
 
+    public function dettaglioPolizzaAction(){
+
+        $id= $this->params('id');
+
+        $aDatiUtente = (array) $this->identity();
+        $dbAdapter = $this->getAdapter();
+        $oPolizza = new Polizza($dbAdapter);
+        $aDatiPolizza = $oPolizza->getPolizzaByID($id);
+
+        $view = new ViewModel(array(
+            'title'=> 'La tua polizza ID Polizza '.$aDatiPolizza['IDPolizza']." compagnia ".$aDatiPolizza['Compagnia'],
+            'aDatiPolizza' => $aDatiPolizza
+        ));
+        $view->setTemplate("utenti/polizza/dettaglioPolizza.phtml");
+        return $view;
+
+    }
+
+
 
     public function profiloAction() {
 
