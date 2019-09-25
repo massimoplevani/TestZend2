@@ -66,6 +66,10 @@ class UtentiController extends AbstractActionController
 
     public function nuovaPolizzaAction(){
 
+         if(empty($this->identity())){
+            return $this->redirect()->toRoute('login');
+        }
+
         $aDatiUtente = (array) $this->identity();
 
         $dbAdapter = $this->getAdapter();
@@ -111,6 +115,10 @@ class UtentiController extends AbstractActionController
 
     public function elencoPolizzaAction(){
 
+         if(empty($this->identity())){
+            return $this->redirect()->toRoute('login');
+        }
+
         $aDatiUtente = (array) $this->identity();
         $dbAdapter = $this->getAdapter();
         $oPolizza = new Polizza($dbAdapter);
@@ -126,6 +134,10 @@ class UtentiController extends AbstractActionController
 
 
     public function modificaPolizzaAction(){
+
+         if(empty($this->identity())){
+            return $this->redirect()->toRoute('login');
+        }
 
         $id= $this->params('id');
         $aDatiUtente = (array) $this->identity();
@@ -186,6 +198,10 @@ class UtentiController extends AbstractActionController
 
 
     public function dettaglioPolizzaAction(){
+
+         if(empty($this->identity())){
+            return $this->redirect()->toRoute('login');
+        }
 
         $id= $this->params('id');
 

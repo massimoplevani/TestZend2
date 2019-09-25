@@ -4,7 +4,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ol class="list-unstyled">
-				<?php foreach ($this->aDatiPolizza as $key => $value) { ?>
+				<?php 
+					if(!empty($this->aDatiPolizza)){
+					foreach ($this->aDatiPolizza as $key => $value) { ?>
 					<li class="list-item">
 						<?php if($key == 'IDTipoPolizza' && $aDatiPolizza['IDTipoPolizza'] == '1'){
 							$value = 'Casa';
@@ -17,7 +19,11 @@
 						<b><?php echo $this->translate(ucfirst($key)); ?></b>: <?php echo (!empty($value)) ?  $value :  "-------" ?>
 						<?php } ?>
 					</li>
-				<?php } ?>
+				<?php } 
+					} else if($this->){ ?>
+						<li class="list-item"><?php echo $this->translate('Nessun dato'); ?></li>
+					<?php } 
+				?>
 			</ol>
 		</div>
 	</div>
