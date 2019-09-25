@@ -15,6 +15,15 @@
 return array( // ToDO make it dynamic - comes from the DB
      'navigation' => array(
          'default' => array(
+            array(
+                 'label' => 'Dashboard', 
+                 'route' => 'dashboard', 
+                 'class' => 'nav-item',
+                 'action'     => 'index',
+                 'controller' => 'Auth',
+                 'resource' => 'Auth\Controller\Auth',
+                 'privilege'    => 'index',
+             ),
          	array(
                  'label' => 'Elenco Polizza', 
                  'route' => 'elenco-polizza', 

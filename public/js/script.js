@@ -19,7 +19,6 @@ $(document).on("change","select[name=tipopolizza]",function () {
 });
 	
 	var pathname = window.location.pathname;
-	console.log($("a[href='/elenco-polizza']").hasClass("active"));
 	if(pathname.indexOf('modifica-polizza') !== false || pathname.indexOf('dettaglio-polizza') !== false){
 		if($("a[href='/elenco-polizza']").hasClass("active") == false){
 			window.setTimeout(function(){
