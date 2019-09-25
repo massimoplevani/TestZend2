@@ -21,7 +21,11 @@
 					</li>
 				<?php } 
 					} else { ?>
-						<li class="list-item"><?php echo $this->translate('Nessun dato'); ?></li>
+						<li class="list-item">
+							<div class="alert alert-danger">
+								<?php echo $this->translate('Nessun dato'); ?>
+							</div>								
+						</li>
 					<?php } 
 				?>
 			</ol>

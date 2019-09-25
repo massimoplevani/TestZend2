@@ -97,7 +97,9 @@
 
 <?php } else { ?>
 
-				<div class='error form-group'><h2><?php echo $this->escapeHtml($this->messages); ?> </h2></div>
+				<div class="alert alert-danger">
+					<div class='error form-group'><p><?php echo $this->escapeHtml($this->messages); ?> </p></div>
+				</div>
 
  <?php 
 } ?>
