@@ -22,7 +22,7 @@
 			<?php	echo $this->form()->openTag($form); ?>
 
 			<div class="<?php echo $this->class; ?>">
-				<div class='error form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+				<div class='<?php echo $this->classError; ?> form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
 			</div>
 
 			<?php echo $this->formRow($form->get('IDUtente')); ?>
@@ -82,7 +82,9 @@
 				<p>Dichiaro di avere preso visione dell' Informativa Privacy e do il consenso al trattamento dei miei dati per le finalità legate al servizio richiesto.</p>
 			</div>
 
-			<div class='error form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+			<div class="<?php echo $this->class; ?>">
+				<div class='<?php echo $this->classError; ?> form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+			</div>
 
 
 			<?php echo $this->formSubmit($form->get('inviaPolizza')); ?>

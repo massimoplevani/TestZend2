@@ -77,6 +77,8 @@ class UtentiController extends AbstractActionController
         $aTipiPolizza = $oPolizza->getTipiPolizza();
         $form =  new polizzaForm($aDatiUtente,$aTipiPolizza);
         $messages = null;
+        $class=null;
+        $classError =null;
         if($this->request->isPost()){
             $form->setInputFilter(new PolizzaPost($this->getServiceLocator()));
             $form->setData($this->request->getPost());
@@ -90,12 +92,15 @@ class UtentiController extends AbstractActionController
 
                 if($check){
                     $aData = $this->prepareDataPolizza($data);
+                    unset($aData['id']);
                     $check = $oPolizza->salvaPolizza($aData);              
                     if($check){
                         return $this->redirect()->toRoute('elenco-polizza');
                     }
                 } else{
                     $messages = "Esiste già una polizza con questo ID $idPolizza e Compagnia '$sCompagnia'!";
+                    $class='alert alert-danger';
+                    $classError ='error';
                 }
           
             }
@@ -105,7 +110,9 @@ class UtentiController extends AbstractActionController
         $view = new ViewModel(array(
             'form' => $form,
             'title'=> 'Inserisci una nuova polizza',
-            'messages' => $messages
+            'messages' => $messages,
+            'class'    => $class,
+            'classError' => $classError
         ));
         $view->setTemplate("utenti/polizza/polizza.phtml");
         return $view;
@@ -149,7 +156,7 @@ class UtentiController extends AbstractActionController
         unset( $aDatiPolizza['DataAggiornamento']);
         $messages = null;
         $class=null;
-
+        $classError = null;
         if(empty($aDatiPolizza)){
             $messages = 'Nessuna polizza trovata con id '.$id.'!';
             $form = null;
@@ -185,6 +192,7 @@ class UtentiController extends AbstractActionController
                              $messages = "Esiste già una polizza uguale!";
                         }
                         $class='alert alert-danger';
+                        $classError = 'error';
                     }
               
                 }
@@ -197,7 +205,8 @@ class UtentiController extends AbstractActionController
             'form' => $form,
             'title'=> 'Modifica la tua polizza',
             'messages' => $messages,
-            'class' => $class
+            'class' => $class,
+            'classError' => $classError
         ));
         $view->setTemplate("utenti/polizza/polizza.phtml");
         return $view;
