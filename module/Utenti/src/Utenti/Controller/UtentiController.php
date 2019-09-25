@@ -150,7 +150,8 @@ class UtentiController extends AbstractActionController
         $messages = null;
 
         if(empty($aDatiPolizza)){
-            $messages = $this->translate('Nessuna polizza trovata!');
+            $messages = 'Nessuna polizza trovata con id '.$id.'!';
+            $form = null;
         } else{
 
             $date=date_create($aDatiPolizza['DataEmissione']);

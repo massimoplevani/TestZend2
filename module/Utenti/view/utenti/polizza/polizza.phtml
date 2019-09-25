@@ -2,14 +2,16 @@
 
 
 <?php 
-	
-	$form = $this->form;
-	$form->prepare();
 
 	$helper = $this->formElementErrors();
 	$helper->setMessageOpenFormat('<div class="help-inline error">');
 	$helper->setMessageSeparatorString('</div><div class="help-inline">');
 	$helper->setMessageCloseString('</div>');
+	
+	if(!empty($form)){
+
+		$form = $this->form;
+		$form->prepare();
 	
 ?>
 
@@ -84,4 +86,11 @@
 
 		</div>
 	</div>
-</div>
+</div
+
+<?php } else { ?>
+
+				<div class='error form-group'><h2><?php echo $this->escapeHtml($this->messages); ?> </h2></div>
+
+ <?php 
+} ?>
