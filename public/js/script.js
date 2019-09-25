@@ -19,14 +19,14 @@ $(document).on("change","select[name=tipopolizza]",function () {
 });
 	
 	var pathname = window.location.pathname;
-	if(pathname.indexOf('modifica-polizza') !== false || pathname.indexOf('dettaglio-polizza') !== false){
+	if(pathname.indexOf('modifica-polizza') != -1 ||pathname.indexOf('dettaglio-polizza') != -1){
 		if($("a[href='/elenco-polizza']").hasClass("active") == false){
 			window.setTimeout(function(){
 				$("a[href='/elenco-polizza']").parent().addClass("active");
 			},10)
 			
 		}
-	}
+	} 
 
 
  $( function() {
