@@ -16,6 +16,9 @@ class polizzaForm extends Form {
 		$iduser = new Element\Hidden('IDUtente');
 		$iduser->setValue($aDatiUtente['id']);
 
+		$id = new Element\Hidden('id');
+		$id->setValue($aDatiPolizza['id']);
+
 		$idpolizza = new Element\Text('idpolizza');
 		$idpolizza->setLabel('ID Polizza*');
 		$idpolizza->setAttribute("class", "form-control");
@@ -104,6 +107,7 @@ class polizzaForm extends Form {
 		$invia->setAttribute("class", "btn btn-primary");
 	
 		$this->add($iduser);
+		$this->add($id);
 		$this->add($idpolizza);
 		$this->add($nomePolizza);
 		$this->add($compagnia);

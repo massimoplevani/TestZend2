@@ -63,6 +63,8 @@ class Polizza extends TableGateway
 
 	public function CheckNonExistPolizzaUguale($aData){
 
+
+
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select('polizza');
      	$select->where($aData);
@@ -71,6 +73,21 @@ class Polizza extends TableGateway
 
 
 		if($results->current() === false){
+
+			$sql2 = new Sql($this->dbAdapter);
+			$select = $sql2->select('polizza');
+	     	$select->where(array(
+	     		'IDPolizza'=>$aData['IDPolizza'],
+	     		'Compagnia'	=> $aData['Compagnia']
+	     	));
+	  		$statement = $sql->prepareStatementForSqlObject($select);
+			$results = $statement->execute();
+			$aDataCheckPolizza = $results->current();
+
+			if($aDataCheckPolizza['id'] != $aData['id']){
+				return '-2';
+			}
+
 			return true;
 		}
 

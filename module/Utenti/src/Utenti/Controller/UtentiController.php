@@ -148,6 +148,7 @@ class UtentiController extends AbstractActionController
         unset( $aDatiPolizza['DataCreazione']);
         unset( $aDatiPolizza['DataAggiornamento']);
         $messages = null;
+        $class=null;
 
         if(empty($aDatiPolizza)){
             $messages = 'Nessuna polizza trovata con id '.$id.'!';
@@ -171,14 +172,19 @@ class UtentiController extends AbstractActionController
                     $aData = $this->prepareDataPolizza($data);
                     unset($aData['DataCreazione']);
                     $check = $oPolizza->CheckNonExistPolizzaUguale($aData);
-
-                    if($check){
+                    if($check == true){
                         $check = $oPolizza->modificaPolizza($aData,$id);              
                         if($check){
                              $messages = "Polizza Modificato con sucesso!";
+                              $class='alert alert-success';
                         }
                     } else{
-                        $messages = "Esiste già una polizza uguale!";
+                        if($check == '-2'){
+                            $messages = "Esiste già una polizza con quel id e compagnia!";
+                        }else{
+                             $messages = "Esiste già una polizza uguale!";
+                        }
+                        $class='alert alert-danger';
                     }
               
                 }
@@ -190,7 +196,8 @@ class UtentiController extends AbstractActionController
         $view = new ViewModel(array(
             'form' => $form,
             'title'=> 'Modifica la tua polizza',
-            'messages' => $messages
+            'messages' => $messages,
+            'class' => $class
         ));
         $view->setTemplate("utenti/polizza/polizza.phtml");
         return $view;
@@ -275,6 +282,7 @@ class UtentiController extends AbstractActionController
 
     public function prepareDataPolizza($aData){
 
+            $aDataPolizza['id'] = $aData['id'];
             $aDataPolizza['IDPolizza'] = $aData['idpolizza'];
             $aDataPolizza['IDTipoPolizza'] = (int)  $aData['tipopolizza'];
             $aDataPolizza['IDUtente'] = $aData['IDUtente'];

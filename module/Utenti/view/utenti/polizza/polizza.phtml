@@ -21,7 +21,12 @@
 		<div class="col-md-12">
 			<?php	echo $this->form()->openTag($form); ?>
 
+			<div class="<?php echo $this->class; ?>">
+				<div class='error form-group'><?php echo $this->escapeHtml($this->messages); ?></div>
+			</div>
+
 			<?php echo $this->formRow($form->get('IDUtente')); ?>
+			<?php echo $this->formRow($form->get('id')); ?>
 			<div class="form-inline">
 				<div class="form-group ">
 					<?php echo $this->formRow($form->get('idpolizza')); ?>
