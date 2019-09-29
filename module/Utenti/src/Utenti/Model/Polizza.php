@@ -42,14 +42,15 @@ class Polizza extends TableGateway
 	}
 
 
-	public function getPolizzaByID($id){
+	public function getPolizzaByID($id = null,$IDUtente=null){
 
-		if(empty($id)) return false;
+		if(empty($id) && empty($IDUtente)) return false;
 
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select('polizza');
      	$select->where(array(
-     		"id" => $id
+     		"id" => $id,
+     		"IDUtente" => $IDUtente
      	));
   		$statement = $sql->prepareStatementForSqlObject($select);
 		$result = $statement->execute();

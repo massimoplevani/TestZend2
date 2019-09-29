@@ -148,10 +148,11 @@ class UtentiController extends AbstractActionController
 
         $id= $this->params('id');
         $aDatiUtente = (array) $this->identity();
+        $IDUtente = $aDatiUtente['id'];
         $dbAdapter = $this->getAdapter();
         $oPolizza = new Polizza($dbAdapter);
         $aTipiPolizza = $oPolizza->getTipiPolizza();
-        $aDatiPolizza = $oPolizza->getPolizzaByID($id);
+        $aDatiPolizza = $oPolizza->getPolizzaByID($id,$IDUtente);
         unset( $aDatiPolizza['DataCreazione']);
         unset( $aDatiPolizza['DataAggiornamento']);
         $messages = null;
@@ -223,9 +224,11 @@ class UtentiController extends AbstractActionController
         $id= $this->params('id');
 
         $aDatiUtente = (array) $this->identity();
+        $IDUtente = $aDatiUtente['id'];
+
         $dbAdapter = $this->getAdapter();
         $oPolizza = new Polizza($dbAdapter);
-        $aDatiPolizza = $oPolizza->getPolizzaByID($id);
+        $aDatiPolizza = $oPolizza->getPolizzaByID($id,$IDUtente);
 
         $view = new ViewModel(array(
             'title'=> 'La tua polizza ID Polizza '.$aDatiPolizza['IDPolizza']." compagnia ".$aDatiPolizza['Compagnia'],
