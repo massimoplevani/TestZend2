@@ -43,3 +43,18 @@ div.error{
 .selectCss{
   display: block!important;
 }
+
+div#ContainerCookie {
+    background: #ccc;
+    display: block;
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+}
+
+.textRight {
+    text-align: right;
+}

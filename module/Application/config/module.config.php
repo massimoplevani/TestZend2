@@ -50,6 +50,17 @@ return array(
                     ),
                 ),
             ),
+             'setinformativa' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/setinformativa',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'setInformativa'
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

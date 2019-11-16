@@ -54,3 +54,13 @@ $(document).on("change","select[name=tipopolizza]",function () {
 
   } );
 
+ $(document).on("click",".accept-cookie",function () {
+	console.log("eentro");
+	$.ajax({
+	  url: "/setinformativa",
+	}).done(function() {
+	  $("#ContainerCookie").remove();
+	});
+	
+});
+
